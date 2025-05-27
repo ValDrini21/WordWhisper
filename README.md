@@ -22,7 +22,7 @@ An interactive speech recognition game designed for children to learn and practi
   - Visual feedback
   - Responsive design
 
-## �� Getting Started
+## Getting Started
 
 1. Clone the repository
 
@@ -34,7 +34,7 @@ git clone https://github.com/yourusername/WordWhisper.git
 3. Allow microphone access when prompted
 4. Click the "Talk" button and start playing!
 
-## ��️ Technologies Used
+## Technologies Used
 
 - HTML5
 - CSS3 (Tailwind CSS)
@@ -58,7 +58,7 @@ git clone https://github.com/yourusername/WordWhisper.git
 - Microphone
 - Internet connection
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Web Speech API for speech recognition capabilities
 - Tailwind CSS for styling
