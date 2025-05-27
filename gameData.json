@@ -1,0 +1,294 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "categoryId": "animals",
+      "imagePath": "images/animals/dog.jpg",
+      "soundPath": "sounds/animals/dog-barking.wav",
+      "alternativePronunciations": ["dog", "doggy", "doggie"],
+      "level": "easy",
+      "points": 3
+    },
+    {
+      "id": "2",
+      "categoryId": "animals",
+      "imagePath": "images/animals/cat.jpg",
+      "soundPath": "sounds/animals/cat-meowing.wav",
+      "alternativePronunciations": ["cat", "kitty", "kitten"],
+      "level": "easy",
+      "points": 3
+    },
+    {
+      "id": "3",
+      "categoryId": "animals",
+      "imagePath": "images/animals/bird.jpg",
+      "soundPath": "sounds/animals/bird-singing.mp3",
+      "alternativePronunciations": ["bird", "birdie", "birdy"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "4",
+      "categoryId": "animals",
+      "imagePath": "images/animals/fish.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["fish", "fishy", "fishi"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "5",
+      "categoryId": "animals",
+      "imagePath": "images/animals/snake.jpg",
+      "soundPath": "sounds/animals/snake-hissing.mp3",
+      "alternativePronunciations": ["snake", "snakey"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "6",
+      "categoryId": "animals",
+      "imagePath": "images/animals/tiger.jpg",
+      "soundPath": "sounds/animals/tiger-roar.wav",
+      "alternativePronunciations": ["tiger", "tiggy"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "7",
+      "categoryId": "animals",
+      "imagePath": "images/animals/elephant.jpg",
+      "soundPath": "sounds/animals/elephant-trumpeting.mp3",
+      "alternativePronunciations": ["elephant", "elephanty"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "8",
+      "categoryId": "animals",
+      "imagePath": "images/animals/lion.jpg",
+      "soundPath": "sounds/animals/lion-growl.mp3",
+      "alternativePronunciations": [
+        "lion",
+        "king lion",
+        "jungle lion",
+        "big cat",
+        "lion cat"
+      ],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "9",
+      "categoryId": "animals",
+      "imagePath": "images/animals/bear.jpg",
+      "soundPath": "sounds/animals/bear-growling.mp3",
+      "alternativePronunciations": ["bear", "beary"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "10",
+      "categoryId": "animals",
+      "imagePath": "images/animals/horse.jpg",
+      "soundPath": "sounds/animals/horse-whinnying.mp3",
+      "alternativePronunciations": ["horse", "horsey"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "11",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/one.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["one", "number one", "1", "number 1"],
+      "level": "easy",
+      "points": 3
+    },
+    {
+      "id": "12",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/two.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["two", "number two", "2", "number 2"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "13",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/three.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["three", "number three", "3", "number 3"],
+      "level": "easy",
+      "points": 3
+    },
+    {
+      "id": "14",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/four.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["four", "number four", "4", "number 4"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "15",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/five.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["five", "number five", "5", "number 5"],
+      "level": "easy",
+      "points": 3
+    },
+    {
+      "id": "16",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/six.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["six", "number six", "6", "number 6"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "17",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/seven.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["seven", "number seven", "7", "number 7"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "18",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/eight.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["eight", "number eight", "8", "number 8"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "19",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/nine.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["nine", "number nine", "9", "number 9"],
+      "level": "easy",
+      "points": 3
+    },
+    {
+      "id": "20",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/ten.jpg",
+      "soundPath": null,
+      "alternativePronunciations": ["ten", "number ten", "10", "number 10"],
+      "level": "easy",
+      "points": 3
+    },
+    {
+      "id": "21",
+      "categoryId": "numbers",
+      "imagePath": "images/numbers/eleven.jpg",
+      "soundPath": null,
+      "alternativePronunciations": [
+        "eleven",
+        "number eleven",
+        "11",
+        "number 11"
+      ],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "22",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/spongebob.jpg",
+      "soundPath": "sounds/cartoons/sponge-bob-song.mp3",
+      "alternativePronunciations": ["spongebob", "sponge bob"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "23",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/spider-man.png",
+      "soundPath": "sounds/cartoons/spiderman-theme.mp3",
+      "alternativePronunciations": ["spider-man", "spiderman"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "24",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/batman.png",
+      "soundPath": "sounds/cartoons/batman-theme.mp3",
+      "alternativePronunciations": ["batman"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "25",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/superman.png",
+      "soundPath": "sounds/cartoons/superman-theme.mp3",
+      "alternativePronunciations": ["superman"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "26",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/mcqueen.png",
+      "soundPath": "sounds/cartoons/mcqueen-kachow.mp3",
+      "alternativePronunciations": ["mcqueen", "lightning mcqueen"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "27",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/mickey-mouse.jpg",
+      "soundPath": "sounds/cartoons/mickey-whistling.mp3",
+      "alternativePronunciations": ["mickey mouse", "mickey"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "28",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/minions.webp",
+      "soundPath": "sounds/cartoons/hello-banana.mp3",
+      "alternativePronunciations": ["minions", "miniony"],
+      "level": "medium",
+      "points": 5
+    },
+    {
+      "id": "29",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/tom-and-jerry.jpg",
+      "soundPath": "sounds/cartoons/tom-and-jerry-theme.mp3",
+      "alternativePronunciations": ["tom and jerry", "tommy jerry"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "30",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/shrek.png",
+      "soundPath": "sounds/cartoons/shrek-song.mp3",
+      "alternativePronunciations": ["shrek"],
+      "level": "hard",
+      "points": 10
+    },
+    {
+      "id": "31",
+      "categoryId": "cartoons",
+      "imagePath": "images/cartoons/pink-panther.png",
+      "soundPath": "sounds/cartoons/pink-panther-theme.mp3",
+      "alternativePronunciations": ["pink panther"],
+      "level": "medium",
+      "points": 5
+    }
+  ]
+}

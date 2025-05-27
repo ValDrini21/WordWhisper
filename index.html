@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speech Recognition Game "Word Whisper!"</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <h1 class="text-2xl font-bold text-center mt-8">
+      Hello User <span>👋</span>
+    </h1>
+
+    <h2 class="text-xl font-bold text-center mt-4">
+      You are playing "Word Whisper!" game
+    </h2>
+
+    <div id="game-container" class="flex flex-col gap-4 my-10 mx-4 h-[80vh]">
+      <div id="game-box" class="flex-1 bg-gray-100 p-4 rounded">
+        <div
+          id="game-categories"
+          class="flex gap-20 items-center justify-center"
+        ></div>
+        <div id="game-instruction-text"></div>
+        <div
+          id="game-question"
+          class="flex flex-col items-center gap-4 mt-4"
+        ></div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div id="talk-button-container">
+          <button
+            onclick="startSpeech()"
+            class="flex items-center gap-2 bg-blue-500 px-10 py-2 rounded text-white text-lg font-semibold hover:bg-blue-600 transition-all duration-300"
+          >
+            Talk
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div id="speech-text-container" class="flex-1 bg-gray-100 p-4 rounded">
+          <p id="speech-text" class="text-lg font-semibold p-2"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="gameScript.js"></script>
+  </body>
+</html>

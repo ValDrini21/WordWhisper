@@ -1,0 +1,25 @@
+{
+  "categories": [
+    {
+      "id": "animals",
+      "name": "Animals",
+      "imagePath": "images/animals/animals.jpg",
+      "description": "Learn about different animals",
+      "soundEffect": "sounds/general/animals-intro.mp3"
+    },
+    {
+      "id": "numbers",
+      "name": "Numbers",
+      "imagePath": "images/numbers/numbers.jpg",
+      "description": "Learn to count numbers",
+      "soundEffect": "sounds/general/numbers-intro.mp3"
+    },
+    {
+      "id": "cartoons",
+      "name": "Cartoons",
+      "imagePath": "images/cartoons/cartoons.jpg",
+      "description": "Fun cartoon characters",
+      "soundEffect": "sounds/general/cartoons-intro.mp3"
+    }
+  ]
+}
