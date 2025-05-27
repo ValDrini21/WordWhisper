@@ -3,7 +3,7 @@
 # Ideas
 
 - Create a game for kids using Speech recognition web speech Api feature
-- Game name "You know this!"
+- Game name "Word Whisper"
 - Features:
   - A button which user would click to talk
   - A text box area in which user would see his speech converted into text
