@@ -8,7 +8,8 @@ let gameState = {
     isGameActive: false,
     categories: [],
     isSoundPlaying: false,
-    currentSoundPath: null
+    currentSoundPath: null,
+    skippedItems: []
 };
 
 let currentAudio = null;
@@ -59,6 +60,12 @@ function displayCategories(categories) {
     instruction.className = "text-center text-lg font-semibold mt-12";
     instruction.textContent = "Please choose a category by speaking on the mic to continue";
     instructionText.appendChild(instruction);
+
+    // Add skip hint
+    const skipHint = document.createElement('p');
+    skipHint.className = "text-center text-sm text-gray-500 mt-2";
+    skipHint.textContent = "Tip: During the game, you can say 'skip' to skip the current item";
+    instructionText.appendChild(skipHint);
 }
 
 function startSpeech() {
@@ -329,6 +336,13 @@ function updateProgressBar() {
 // Check user's answer
 function checkAnswer(transcript) {
     // console.log("Checking answer:", transcript);
+    if (transcript.toLowerCase() === 'skip') {
+        gameState.skippedItems.push(gameState.currentItem);
+        playSound('sounds/general/skip.wav', false);
+        displayNextItem();
+
+        return;
+    }
 
     const isCorrect = gameState.currentItem.alternativePronunciations.some(
         pronunciation => pronunciation.toLowerCase() === transcript
@@ -346,7 +360,7 @@ function checkAnswer(transcript) {
 
 // Add this function to handle confetti
 function triggerConfetti() {
-    const count = 200;
+    const count = 300;
     const defaults = {
         origin: { y: 0.7 }
     };
@@ -403,6 +417,27 @@ function endCategory() {
         </div>
     `;
 
+    // Handle skipped items
+    const skippedContainer = document.getElementById('skipped-items-container');
+    if (gameState.skippedItems.length > 0) {
+        skippedContainer.classList.remove('hidden');
+        const skippedItemsContent = skippedContainer.querySelector('.flex.flex-wrap');
+        skippedItemsContent.innerHTML = gameState.skippedItems.map(item => `
+            <div class="bg-white p-4 rounded shadow w-64">
+                <div class="h-48 bg-gray-100 rounded-lg overflow-hidden">
+                    <img
+                        src="${item.imagePath}"
+                        alt="${item.categoryId}"
+                        class="w-full h-full object-contain"
+                    />
+                </div>
+                <p class="text-lg font-semibold text-center mt-2">${item.alternativePronunciations[0]}</p>
+            </div>
+        `).join('');
+    } else {
+        skippedContainer.classList.add('hidden');
+    }
+
     // Trigger confetti
     triggerConfetti();
 }
@@ -429,6 +464,7 @@ function playAgain() {
     gameState.currentCategory = null;
     gameState.totalItems = 0;
     gameState.completedItems = 0;
+    gameState.skippedItems = [];
 
     const categoriesContainer = document.getElementById('game-categories');
     categoriesContainer.style.display = ''; // Show the categories container again
@@ -439,6 +475,10 @@ function playAgain() {
     // Clear the question container
     const questionContainer = document.getElementById('game-question');
     questionContainer.innerHTML = '';
+
+    // Hide the skipped items container
+    const skippedContainer = document.getElementById('skipped-items-container');
+    skippedContainer.classList.add('hidden');
 }
 
 // Initialize game
