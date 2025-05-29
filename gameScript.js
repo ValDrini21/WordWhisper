@@ -382,16 +382,26 @@ function displayNextItem(options = { stopSound: true }) {
     const questionContainer = document.getElementById('game-question');
     questionContainer.innerHTML = `
         <div class="flex flex-col items-center gap-4">
-            <img src="${item.imagePath}" alt="${item.categoryId}" class="max-w-md max-h-96 rounded-lg shadow-md" />
+            <div class="relative w-full max-w-md h-64 md:h-96">
+                <div id="loading-spinner" class="absolute inset-0 flex items-center justify-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+                </div>
+                <img
+                    src="${item.imagePath}"
+                    alt="${item.categoryId}"
+                    class="w-full h-full object-contain rounded-lg shadow-md opacity-0 transition-opacity duration-300"
+                    onload="document.getElementById('loading-spinner').style.display = 'none'; this.classList.remove('opacity-0')"
+                />
+            </div>
             ${item.soundPath ? `
                 <button
                     data-sound-path="${item.soundPath}"
                     onclick="playSound('${item.soundPath}', true)"
-                    class="bg-blue-500 text-white px-4 py-2 rounded">
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
                     Play Sound
                 </button>
             ` : ''}
-            <p class="text-xl font-semibold">Whisper on the mic to tell us what this is?</p>
+            <p class="text-lg md:text-xl font-semibold text-center px-2">Whisper on the mic to tell us what this is?</p>
         </div>
     `;
 
@@ -433,7 +443,17 @@ function checkAnswer(transcript) {
     if (transcript.toLowerCase() === 'skip') {
         gameState.skippedItems.push(gameState.currentItem);
         playSound('sounds/general/skip.wav', false);
-        displayNextItem();
+
+        // Add fade out effect
+        const questionContainer = document.getElementById('game-question');
+        questionContainer.classList.add('fade-out');
+
+        // Wait for fade out to complete before showing next item
+        setTimeout(() => {
+            displayNextItem();
+            questionContainer.classList.remove('fade-out');
+            questionContainer.classList.add('fade-in');
+        }, 300);
 
         return;
     }
@@ -452,7 +472,17 @@ function checkAnswer(transcript) {
         gameState.completedItems++;
 
         playSound('sounds/general/ding.wav', false);
-        displayNextItem();
+
+        // Add fade out effect
+        const questionContainer = document.getElementById('game-question');
+        questionContainer.classList.add('fade-out');
+
+        // Wait for fade out to complete before showing next item
+        setTimeout(() => {
+            displayNextItem();
+            questionContainer.classList.remove('fade-out');
+            questionContainer.classList.add('fade-in');
+        }, 300);
     } else {
         playSound('sounds/general/buzzer.mp3', false);
     }
