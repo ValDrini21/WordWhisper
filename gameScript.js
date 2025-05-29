@@ -9,7 +9,8 @@ let gameState = {
     categories: [],
     isSoundPlaying: false,
     currentSoundPath: null,
-    skippedItems: []
+    skippedItems: [],
+    questionStartTime: null,
 };
 
 let currentAudio = null;
@@ -290,6 +291,7 @@ function displayNextItem(options = { stopSound: true }) {
     gameState.currentItem = item;
 
     // console.log('Displaying item:', item);
+    gameState.questionStartTime = Date.now();
 
     // Update UI
     const questionContainer = document.getElementById('game-question');
@@ -349,9 +351,25 @@ function checkAnswer(transcript) {
     );
 
     if (isCorrect) {
-        playSound('sounds/general/ding.wav', false);
-        gameState.userScore += gameState.currentItem.points;
+        // Calculate response time in seconds
+        const responseTime = (Date.now() - gameState.questionStartTime) / 1000;
+
+        // Calculate bonus points based on response time
+        let bonusPoints = 0;
+        if (responseTime <= 2) {
+            bonusPoints = 5;
+        } else if (responseTime <= 5) {
+            bonusPoints = 3;
+        } else if (responseTime <= 10) {
+            bonusPoints = 1;
+        }
+
+        // Add bonus points to the score
+        const totalPoints = gameState.currentItem.points + bonusPoints;
+        gameState.userScore += totalPoints;
         gameState.completedItems++;
+
+        playSound('sounds/general/ding.wav', false);
         displayNextItem();
     } else {
         playSound('sounds/general/buzzer.mp3', false);
