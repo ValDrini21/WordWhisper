@@ -25,3 +25,17 @@
   - Add a progress bar as user moves on with the questions
   - Game sounds when user gets a category item name correctly like 'Ding' or incorrectly like 'buzz'
   - Sound effects based on the category selected by user
+
+---
+
+Tasks
+
+- remove same words, use toLower to compare the result - done
+- Do something (display animation, like pulse or wave) when listening class is added to talk-button-container div - done
+- Play Sound only play one instance of sound - done
+- If we move to another category stop the sound immediately - done
+- Play Sound, add the option to pause sound - done
+- Display progress bar - done
+- Display confetti on the end of the category - done
+- Skip feature - done
+- Add points based on the speed of the answer by user, like if user guesses right under 2s give him +5 points, if under 5s +3, under 10s +1 else no extra points - done
