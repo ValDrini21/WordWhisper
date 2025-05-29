@@ -1,3 +1,14 @@
+console.log(`
+%cWord Whisper
+%cCreated by Valdrin Nasufi
+
+%cA speech recognition game that makes learning fun!
+`,
+    'color: #3b82f6; font-size: 24px; font-weight: bold;',
+    'color: #6b7280; font-size: 14px; font-style: italic;',
+    'color: #4b5563; font-size: 12px;'
+);
+
 let gameState = {
     currentCategory: null,
     remainingItems: [],
@@ -27,7 +38,7 @@ async function loadCategories() {
     try {
         const response = await fetch('gameCategories.json');
         const data = await response.json();
-        console.log('Categories loaded:', data);
+        // console.log('Categories loaded:', data);
         gameState.categories = data.categories;
         displayCategories(data.categories);
     } catch (error) {
@@ -36,24 +47,24 @@ async function loadCategories() {
 }
 
 // Display categories in the game-categories div
+function getRotationClass(index) {
+    switch (index) {
+        case 0: return '-rotate-6 mt-20';  // First card
+        case 1: return 'rotate-0';         // Second card
+        case 2: return 'rotate-6 mt-20';   // Third card
+        default: return 'rotate-0';
+    }
+}
+
 function displayCategories(categories) {
     const categoriesContainer = document.getElementById('game-categories');
-    categoriesContainer.innerHTML = categories.map((category, index) => {
-        // Define rotation classes based on index
-        let rotationClass = '';
-        if (index === 0) rotationClass = '-rotate-6 mt-20';  // First card
-        else if (index === 1) rotationClass = 'rotate-0';  // Second card
-        else if (index === 2) rotationClass = 'rotate-6 mt-20';  // Third card
-        else rotationClass = 'rotate-0';
-
-        return `
-        <div class="category-card ${rotationClass}" data-category-id="${category.id}">
+    categoriesContainer.innerHTML = categories.map((category, index) => `
+        <div class="category-card ${getRotationClass(index)}" data-category-id="${category.id}">
             <img src="${category.imagePath}" alt="${category.name}" class="w-64 h-64 object-cover rounded" />
             <h3 class="text-lg font-semibold">${category.name}</h3>
             <p class="text-sm text-gray-600">${category.description}</p>
         </div>
-        `;
-    }).join('');
+    `).join('');
 
     // Add instruction text
     const instruction = document.createElement('p');
@@ -130,8 +141,8 @@ function playSound(soundPath, ShouldStopCurrentSound = true) {
         return;
     }
 
-    console.log("Playing sound:", soundPath);
-    console.log("ShouldStopCurrentSound:", ShouldStopCurrentSound);
+    // console.log("Playing sound:", soundPath);
+    // console.log("ShouldStopCurrentSound:", ShouldStopCurrentSound);
     // Create and play new sound
     currentAudio = new Audio(soundPath);
     currentAudio.ShouldStopCurrentSound = ShouldStopCurrentSound;
@@ -189,12 +200,10 @@ function updateSoundButton(soundPath, isPlaying) {
 }
 
 function stopCurrentSound() {
-    console.log("Stopping current sounds");
-    console.log("Playing audios:", playingAudios);
+    // console.log("Playing audios:", playingAudios);
 
     // Stop all stoppable sounds
     playingAudios.forEach(audio => {
-        console.log("Audio isStoppable:", audio.ShouldStopCurrentSound);
         if (audio.ShouldStopCurrentSound) {
             audio.pause();
             audio.currentTime = 0;
@@ -218,7 +227,7 @@ recognition.onresult = async (event) => {
     if (!gameState.isGameActive) {
         // Handle category selection
         const category = selectCategory(transcript);
-        console.log("Selected category:", category);
+        // console.log("Selected category:", category);
         if (category) {
             gameState.currentCategory = category;
             playSound(category.soundEffect, false);
@@ -267,7 +276,7 @@ async function loadCategoryItems(categoryId) {
     try {
         const response = await fetch('gameData.json');
         const data = await response.json();
-        console.log('Category items loaded:', data);
+        // console.log('Category items loaded:', data);
 
         gameState.remainingItems = data.items.filter(item =>
             item.categoryId === categoryId
@@ -284,7 +293,7 @@ async function loadCategoryItems(categoryId) {
         // Update progress bar
         updateProgressBar();
 
-        console.log('Remaining items:', gameState.remainingItems);
+        // console.log('Remaining items:', gameState.remainingItems);
         gameState.isGameActive = true;
 
         // Hide the categories container
@@ -367,6 +376,13 @@ function updateProgressBar() {
 }
 
 // Check user's answer
+function calculateBonusPoints(responseTime) {
+    if (responseTime <= 2) return 5;
+    if (responseTime <= 5) return 3;
+    if (responseTime <= 10) return 1;
+    return 0;
+}
+
 function checkAnswer(transcript) {
     // console.log("Checking answer:", transcript);
     if (transcript.toLowerCase() === 'skip') {
@@ -384,19 +400,9 @@ function checkAnswer(transcript) {
     if (isCorrect) {
         // Calculate response time in seconds
         const responseTime = (Date.now() - gameState.questionStartTime) / 1000;
-
-        // Calculate bonus points based on response time
-        let bonusPoints = 0;
-        if (responseTime <= 2) {
-            bonusPoints = 5;
-        } else if (responseTime <= 5) {
-            bonusPoints = 3;
-        } else if (responseTime <= 10) {
-            bonusPoints = 1;
-        }
-
-        // Add bonus points to the score
+        const bonusPoints = calculateBonusPoints(responseTime);
         const totalPoints = gameState.currentItem.points + bonusPoints;
+
         gameState.userScore += totalPoints;
         gameState.completedItems++;
 
@@ -491,21 +497,34 @@ function endCategory() {
     triggerConfetti();
 }
 
-// When game ends and user wants to play again
-function playAgain() {
-    // Stop all sounds when starting over
-    stopCurrentSound();
-
-    playSound('sounds/general/play-again.wav');
-
+// Add these new functions to handle UI elements
+function resetGameElements() {
     // Hide progress bar
     const progressContainer = document.getElementById('progress-container');
     progressContainer.classList.add('hidden');
 
-    // Reset progress
+    // Reset progress bar width
     const progressBar = progressContainer.querySelector('.bg-blue-600');
     progressBar.style.width = '0%';
 
+    // Show categories container
+    const categoriesContainer = document.getElementById('game-categories');
+    categoriesContainer.style.display = '';
+
+    // Show instruction text
+    const instructionText = document.getElementById('game-instruction-text');
+    instructionText.style.display = '';
+
+    // Clear question container
+    const questionContainer = document.getElementById('game-question');
+    questionContainer.innerHTML = '';
+
+    // Hide skipped items container
+    const skippedContainer = document.getElementById('skipped-items-container');
+    skippedContainer.classList.add('hidden');
+}
+
+function resetGameState() {
     gameState.userScore = 0;
     gameState.currentItem = null;
     gameState.remainingItems = [];
@@ -514,20 +533,17 @@ function playAgain() {
     gameState.totalItems = 0;
     gameState.completedItems = 0;
     gameState.skippedItems = [];
+}
 
-    const categoriesContainer = document.getElementById('game-categories');
-    categoriesContainer.style.display = ''; // Show the categories container again
+// Refactored playAgain function
+function playAgain() {
+    // Stop all sounds when starting over
+    stopCurrentSound();
+    playSound('sounds/general/play-again.wav');
 
-    const instructionText = document.getElementById('game-instruction-text');
-    instructionText.style.display = ''; // Show the instruction text again
-
-    // Clear the question container
-    const questionContainer = document.getElementById('game-question');
-    questionContainer.innerHTML = '';
-
-    // Hide the skipped items container
-    const skippedContainer = document.getElementById('skipped-items-container');
-    skippedContainer.classList.add('hidden');
+    // Reset game state and UI elements
+    resetGameState();
+    resetGameElements();
 }
 
 // Initialize the game
