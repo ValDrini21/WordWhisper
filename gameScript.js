@@ -344,7 +344,47 @@ function checkAnswer(transcript) {
     }
 }
 
-// End category
+// Add this function to handle confetti
+function triggerConfetti() {
+    const count = 200;
+    const defaults = {
+        origin: { y: 0.7 }
+    };
+
+    function fire(particleRatio, opts) {
+        confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio)
+        });
+    }
+
+    // Fire multiple confetti bursts with different configurations
+    fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+    });
+    fire(0.2, {
+        spread: 60,
+    });
+    fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+    });
+}
+
+// Modify endCategory to include confetti
 function endCategory() {
     // Stop all sounds when category ends
     stopCurrentSound();
@@ -352,6 +392,7 @@ function endCategory() {
     // Hide progress bar
     const progressContainer = document.getElementById('progress-container');
     progressContainer.classList.add('hidden');
+
 
     const questionContainer = document.getElementById('game-question');
     questionContainer.innerHTML = `
@@ -361,6 +402,9 @@ function endCategory() {
             <p class="text-lg">Speak the word 'Play again' to start over</p>
         </div>
     `;
+
+    // Trigger confetti
+    triggerConfetti();
 }
 
 // When game ends and user wants to play again
