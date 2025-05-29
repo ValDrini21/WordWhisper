@@ -80,6 +80,32 @@
   animation-delay: 0.91s;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Optional: Add a fade transition for the entire question container */
+#game-question {
+  transition: opacity 0.3s ease-in-out;
+}
+
+#game-question.fade-out {
+  opacity: 0;
+}
+
+#game-question.fade-in {
+  opacity: 1;
+}
+
 @media (min-width: 535px) {
   .xs\:mt-20 {
     margin-top: 5rem; /* This is equivalent to mt-20 in Tailwind */
