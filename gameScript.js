@@ -2,6 +2,8 @@ let gameState = {
     currentCategory: null,
     remainingItems: [],
     currentItem: null,
+    totalItems: 0,
+    completedItems: 0,
     userScore: 0,
     isGameActive: false,
     categories: [],
@@ -232,6 +234,17 @@ async function loadCategoryItems(categoryId) {
             item.categoryId === categoryId
         );
 
+        // Set total items count
+        gameState.totalItems = gameState.remainingItems.length;
+        gameState.completedItems = 0;
+
+        // Show progress bar
+        const progressContainer = document.getElementById('progress-container');
+        progressContainer.classList.remove('hidden');
+
+        // Update progress bar
+        updateProgressBar();
+
         console.log('Remaining items:', gameState.remainingItems);
         gameState.isGameActive = true;
 
@@ -288,8 +301,29 @@ function displayNextItem(options = { stopSound: true }) {
         </div>
     `;
 
+    updateProgressBar();
+
     // Remove the displayed item from remaining items
     gameState.remainingItems.splice(randomIndex, 1);
+}
+
+// Add function to update progress bar
+function updateProgressBar() {
+    const progressContainer = document.getElementById('progress-container');
+    if (!progressContainer) return;
+
+    const progress = (gameState.completedItems / gameState.totalItems) * 100;
+
+    // Update progress bar width
+    const progressBar = progressContainer.querySelector('.bg-blue-600');
+    progressBar.style.width = `${progress}%`;
+
+    // Update text
+    const textContainer = progressContainer.querySelector('.flex.justify-between');
+    textContainer.innerHTML = `
+        <span>${gameState.completedItems} of ${gameState.totalItems} items</span>
+        <span>${Math.round(progress)}%</span>
+    `;
 }
 
 // Check user's answer
@@ -303,6 +337,7 @@ function checkAnswer(transcript) {
     if (isCorrect) {
         playSound('sounds/general/ding.wav', false);
         gameState.userScore += gameState.currentItem.points;
+        gameState.completedItems++;
         displayNextItem();
     } else {
         playSound('sounds/general/buzzer.mp3', false);
@@ -313,6 +348,10 @@ function checkAnswer(transcript) {
 function endCategory() {
     // Stop all sounds when category ends
     stopCurrentSound();
+
+    // Hide progress bar
+    const progressContainer = document.getElementById('progress-container');
+    progressContainer.classList.add('hidden');
 
     const questionContainer = document.getElementById('game-question');
     questionContainer.innerHTML = `
@@ -331,11 +370,21 @@ function playAgain() {
 
     playSound('sounds/general/play-again.wav');
 
+    // Hide progress bar
+    const progressContainer = document.getElementById('progress-container');
+    progressContainer.classList.add('hidden');
+
+    // Reset progress
+    const progressBar = progressContainer.querySelector('.bg-blue-600');
+    progressBar.style.width = '0%';
+
     gameState.userScore = 0;
     gameState.currentItem = null;
     gameState.remainingItems = [];
     gameState.isGameActive = false;
     gameState.currentCategory = null;
+    gameState.totalItems = 0;
+    gameState.completedItems = 0;
 
     const categoriesContainer = document.getElementById('game-categories');
     categoriesContainer.style.display = ''; // Show the categories container again

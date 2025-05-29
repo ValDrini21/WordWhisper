@@ -23,6 +23,21 @@
           class="flex gap-20 items-center justify-center"
         ></div>
         <div id="game-instruction-text"></div>
+
+        <!-- Add progress bar container here -->
+        <div id="progress-container" class="w-full mb-4 hidden">
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div
+              class="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
+              style="width: 0%"
+            ></div>
+          </div>
+          <div class="flex justify-between text-sm text-gray-600 mt-1">
+            <span>0 of 0 items</span>
+            <span>0%</span>
+          </div>
+        </div>
+
         <div
           id="game-question"
           class="flex flex-col items-center gap-4 mt-4"
@@ -51,7 +66,6 @@
             </svg>
           </button>
           <div class="sound-wave">
-            <div class="sound-wave-bar"></div>
             <div class="sound-wave-bar"></div>
             <div class="sound-wave-bar"></div>
             <div class="sound-wave-bar"></div>
