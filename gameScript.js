@@ -69,7 +69,38 @@ function displayCategories(categories) {
     instructionText.appendChild(skipHint);
 }
 
-function startSpeech() {
+// Add this function to check for microphone availability
+async function checkMicrophoneAvailability() {
+    try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const hasMicrophone = devices.some(device => device.kind === 'audioinput');
+        return hasMicrophone;
+    } catch (error) {
+        console.error('Error checking microphone:', error);
+        return false;
+    }
+}
+
+// Add this function to display microphone error message
+function displayMicrophoneError(containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = `
+        <div class="text-center text-red-600 font-semibold">
+            <p class="text-xl mb-2">You need a microphone to play this game</p>
+            <p class="text-sm">Please connect a microphone and refresh the page</p>
+        </div>
+    `;
+}
+
+// Modify the startSpeech function
+async function startSpeech() {
+    const hasMicrophone = await checkMicrophoneAvailability();
+
+    if (!hasMicrophone) {
+        displayMicrophoneError('game-question');
+        return;
+    }
+
     if (!recognition) {
         alert("Speech recognition is not supported in your browser");
         return;
@@ -499,8 +530,15 @@ function playAgain() {
     skippedContainer.classList.add('hidden');
 }
 
-// Initialize game
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize the game
+document.addEventListener('DOMContentLoaded', async () => {
+    const hasMicrophone = await checkMicrophoneAvailability();
+
+    if (!hasMicrophone) {
+        displayMicrophoneError('game-categories');
+        return;
+    }
+
     loadCategories();
 });
 
