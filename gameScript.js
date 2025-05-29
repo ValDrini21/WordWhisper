@@ -5,8 +5,12 @@ let gameState = {
     userScore: 0,
     isGameActive: false,
     categories: [],
+    isSoundPlaying: false,
+    currentSoundPath: null
 };
 
+let currentAudio = null;
+let playingAudios = [];
 
 // Speech Recognition Setup
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
@@ -62,7 +66,9 @@ function startSpeech() {
     }
 
     recognition.start();
-    document.getElementById('talk-button-container').classList.add('listening');
+    const talkButtonContainer = document.getElementById('talk-button-container');
+    talkButtonContainer.classList.add('listening');
+    document.querySelector('.sound-wave').style.display = 'flex';
 }
 
 // Select category based on speech
@@ -73,15 +79,93 @@ function selectCategory(transcript) {
 }
 
 // Play category sound effect
-function playSound(soundPath) {
+function playSound(soundPath, ShouldStopCurrentSound = true) {
     if (!soundPath) {
         return;
     }
 
-    const audio = new Audio(soundPath);
-    audio.play().catch(error => {
+    // If the same sound is already playing, don't play it again
+    if (gameState.isSoundPlaying && gameState.currentSoundPath === soundPath) {
+        return;
+    }
+
+    console.log("Playing sound:", soundPath);
+    console.log("ShouldStopCurrentSound:", ShouldStopCurrentSound);
+    // Create and play new sound
+    currentAudio = new Audio(soundPath);
+    currentAudio.ShouldStopCurrentSound = ShouldStopCurrentSound;
+
+    // Update game state
+    gameState.isSoundPlaying = true;
+    gameState.currentSoundPath = soundPath;
+
+    // Add to our tracking array
+    playingAudios.push(currentAudio);
+
+    // Update UI to show pause button
+    updateSoundButton(soundPath, true);
+
+    currentAudio.play().catch(error => {
         console.error('Error playing sound:', error);
+        gameState.isSoundPlaying = false;
+        gameState.currentSoundPath = null;
+        updateSoundButton(soundPath, false);
     });
+
+    // Handle sound end
+    currentAudio.onended = () => {
+        gameState.isSoundPlaying = false;
+        gameState.currentSoundPath = null;
+        updateSoundButton(soundPath, false);
+    };
+}
+
+// New function to pause sound
+function pauseSound(soundPath) {
+    if (currentAudio && gameState.currentSoundPath === soundPath) {
+        currentAudio.pause();
+        gameState.isSoundPlaying = false;
+        updateSoundButton(soundPath, false);
+    }
+}
+
+// New function to update the sound button UI
+function updateSoundButton(soundPath, isPlaying) {
+    const button = document.querySelector(`button[data-sound-path="${soundPath}"]`);
+    if (button) {
+        if (isPlaying) {
+            button.innerHTML = 'Pause Sound';
+            button.onclick = () => pauseSound(soundPath);
+            button.classList.remove('bg-blue-500');
+            button.classList.add('bg-yellow-500');
+        } else {
+            button.innerHTML = 'Play Sound';
+            button.onclick = () => playSound(soundPath, true);
+            button.classList.remove('bg-yellow-500');
+            button.classList.add('bg-blue-500');
+        }
+    }
+}
+
+function stopCurrentSound() {
+    console.log("Stopping current sounds");
+    console.log("Playing audios:", playingAudios);
+
+    // Stop all stoppable sounds
+    playingAudios.forEach(audio => {
+        console.log("Audio isStoppable:", audio.ShouldStopCurrentSound);
+        if (audio.ShouldStopCurrentSound) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    });
+
+    // Clear the array completely
+    playingAudios = [];
+
+    // Reset sound state
+    gameState.isSoundPlaying = false;
+    gameState.currentSoundPath = null;
 }
 
 
@@ -96,7 +180,7 @@ recognition.onresult = async (event) => {
         console.log("Selected category:", category);
         if (category) {
             gameState.currentCategory = category;
-            playSound(category.soundEffect);
+            playSound(category.soundEffect, false);
             await loadCategoryItems(category.id);
         } else {
             playSound('sounds/general/buzzer.mp3');
@@ -123,6 +207,20 @@ recognition.onresult = async (event) => {
     }
 }
 
+// Add this to your recognition event handlers
+recognition.onend = () => {
+    const talkButtonContainer = document.getElementById('talk-button-container');
+    talkButtonContainer.classList.remove('listening');
+    document.querySelector('.sound-wave').style.display = 'none';
+};
+
+recognition.onerror = (event) => {
+    const talkButtonContainer = document.getElementById('talk-button-container');
+    talkButtonContainer.classList.remove('listening');
+    document.querySelector('.sound-wave').style.display = 'none';
+    console.error('Speech recognition error:', event.error);
+};
+
 // Load items for selected category
 async function loadCategoryItems(categoryId) {
     try {
@@ -144,14 +242,22 @@ async function loadCategoryItems(categoryId) {
         instructionText.style.display = 'none';
 
         // Display the first item
-        displayNextItem();
+        displayNextItem({ stopSound: false });
     } catch (error) {
         console.error('Error loading category items:', error);
     }
 }
 
 // Display next random item
-function displayNextItem() {
+function displayNextItem(options = { stopSound: true }) {
+    const { stopSound } = options;
+    // Only stop sounds that are marked as stoppable
+    if (stopSound) {
+        stopCurrentSound();
+        gameState.isSoundPlaying = false;
+        gameState.currentSoundPath = null;
+    }
+
     if (gameState.remainingItems.length === 0) {
         endCategory();
         return;
@@ -171,8 +277,10 @@ function displayNextItem() {
         <div class="flex flex-col items-center gap-4">
             <img src="${item.imagePath}" alt="${item.categoryId}" class="max-w-md max-h-96 rounded-lg shadow-md" />
             ${item.soundPath ? `
-                <audio onclick="playSound('${item.soundPath}')"></audio>
-                <button onclick="playSound('${item.soundPath}')" class="bg-blue-500 text-white px-4 py-2 rounded">
+                <button
+                    data-sound-path="${item.soundPath}"
+                    onclick="playSound('${item.soundPath}', true)"
+                    class="bg-blue-500 text-white px-4 py-2 rounded">
                     Play Sound
                 </button>
             ` : ''}
@@ -193,16 +301,19 @@ function checkAnswer(transcript) {
     );
 
     if (isCorrect) {
-        playSound('sounds/general/ding.wav');
+        playSound('sounds/general/ding.wav', false);
         gameState.userScore += gameState.currentItem.points;
         displayNextItem();
     } else {
-        playSound('sounds/general/buzzer.mp3');
+        playSound('sounds/general/buzzer.mp3', false);
     }
 }
 
 // End category
 function endCategory() {
+    // Stop all sounds when category ends
+    stopCurrentSound();
+
     const questionContainer = document.getElementById('game-question');
     questionContainer.innerHTML = `
         <div class="text-center">
@@ -215,6 +326,9 @@ function endCategory() {
 
 // When game ends and user wants to play again
 function playAgain() {
+    // Stop all sounds when starting over
+    stopCurrentSound();
+
     playSound('sounds/general/play-again.wav');
 
     gameState.userScore = 0;
