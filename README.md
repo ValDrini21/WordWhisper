@@ -2,6 +2,10 @@
 
 An interactive speech recognition game designed for children to learn and practice vocabulary through fun categories.
 
+## Live Demo
+
+Try the game here: [Word Whisper Demo](https://valdrini21.github.io/WordWhisper/)
+
 ## 🎯 Features
 
 - **Speech Recognition**: Hands-free interaction using Web Speech API
@@ -58,8 +62,16 @@ git clone https://github.com/yourusername/WordWhisper.git
 - Microphone
 - Internet connection
 
+## 📱 Mobile Support
+
+The game is responsive and works on both desktop and mobile devices.
+
 ## Acknowledgments
 
 - Web Speech API for speech recognition capabilities
 - Tailwind CSS for styling
 - All the free sound effects and images used in the game
+
+## 👨 Author
+
+Created by Valdrin Nasufi

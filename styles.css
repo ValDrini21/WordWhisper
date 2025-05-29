@@ -79,3 +79,9 @@
 .sound-wave-bar:nth-child(14) {
   animation-delay: 0.91s;
 }
+
+@media (min-width: 535px) {
+  .xs\:mt-20 {
+    margin-top: 5rem; /* This is equivalent to mt-20 in Tailwind */
+  }
+}

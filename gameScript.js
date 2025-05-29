@@ -49,9 +49,9 @@ async function loadCategories() {
 // Display categories in the game-categories div
 function getRotationClass(index) {
     switch (index) {
-        case 0: return '-rotate-6 mt-20';  // First card
-        case 1: return 'rotate-0';         // Second card
-        case 2: return 'rotate-6 mt-20';   // Third card
+        case 0: return '-rotate-6 xs:mt-20';
+        case 1: return 'rotate-0';
+        case 2: return 'rotate-6 xs:mt-20';
         default: return 'rotate-0';
     }
 }
@@ -60,7 +60,7 @@ function displayCategories(categories) {
     const categoriesContainer = document.getElementById('game-categories');
     categoriesContainer.innerHTML = categories.map((category, index) => `
         <div class="category-card ${getRotationClass(index)}" data-category-id="${category.id}">
-            <img src="${category.imagePath}" alt="${category.name}" class="w-64 h-64 object-cover rounded" />
+            <img src="${category.imagePath}" alt="${category.name}" class="w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 object-cover rounded" />
             <h3 class="text-lg font-semibold">${category.name}</h3>
             <p class="text-sm text-gray-600">${category.description}</p>
         </div>
@@ -83,24 +83,69 @@ function displayCategories(categories) {
 // Add this function to check for microphone availability
 async function checkMicrophoneAvailability() {
     try {
+        // Check if we're in a secure context
+        if (!window.isSecureContext) {
+            displayMicrophoneError('game-question', 'not_secure');
+            return false;
+        }
+
+        // Check if mediaDevices is available
+        if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+            displayMicrophoneError('game-question', 'api_not_available');
+            return false;
+        }
+
         const devices = await navigator.mediaDevices.enumerateDevices();
         const hasMicrophone = devices.some(device => device.kind === 'audioinput');
-        return hasMicrophone;
+
+        if (!hasMicrophone) {
+            displayMicrophoneError('game-question', 'no_mic');
+            return false;
+        }
+
+        return true;
     } catch (error) {
         console.error('Error checking microphone:', error);
+        displayMicrophoneError('game-question', 'not_secure');
         return false;
     }
 }
 
 // Add this function to display microphone error message
-function displayMicrophoneError(containerId) {
+function displayMicrophoneError(containerId, errorType = 'no_mic') {
     const container = document.getElementById(containerId);
-    container.innerHTML = `
-        <div class="text-center text-red-600 font-semibold">
-            <p class="text-xl mb-2">You need a microphone to play this game</p>
-            <p class="text-sm">Please connect a microphone and refresh the page</p>
-        </div>
-    `;
+    let message = '';
+
+    switch (errorType) {
+        case 'no_mic':
+            message = `
+                <div class="text-center text-red-600 font-semibold">
+                    <p class="text-xl mb-2">You need a microphone to play this game</p>
+                    <p class="text-sm">Please connect a microphone and refresh the page</p>
+                </div>
+            `;
+            break;
+        case 'not_secure':
+            message = `
+                <div class="text-center text-red-600 font-semibold">
+                    <p class="text-xl mb-2">Secure Connection Required</p>
+                    <p class="text-sm">This game requires a secure connection (HTTPS) to access the microphone</p>
+                    <p class="text-sm">Please use a secure connection or localhost</p>
+                </div>
+            `;
+            break;
+        case 'api_not_available':
+            message = `
+                <div class="text-center text-red-600 font-semibold">
+                    <p class="text-xl mb-2">Browser Not Supported</p>
+                    <p class="text-sm">Your browser doesn't support the required microphone features</p>
+                    <p class="text-sm">Please try using a different browser</p>
+                </div>
+            `;
+            break;
+    }
+
+    container.innerHTML = message;
 }
 
 // Modify the startSpeech function
@@ -108,7 +153,7 @@ async function startSpeech() {
     const hasMicrophone = await checkMicrophoneAvailability();
 
     if (!hasMicrophone) {
-        displayMicrophoneError('game-question');
+        // The error message will be displayed by checkMicrophoneAvailability
         return;
     }
 
