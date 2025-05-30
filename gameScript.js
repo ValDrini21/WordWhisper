@@ -660,11 +660,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadCategories();
 });
 
-// Add to gameScript.js
-window.toggleLanguageDropdown = function () {
+// At the top of gameScript.js, add this
+const toggleLanguageDropdown = function () {
     const dropdown = document.getElementById('language-dropdown');
     dropdown.classList.toggle('hidden');
 };
+
+// Make it available globally
+window.toggleLanguageDropdown = toggleLanguageDropdown;
 
 // Close dropdown when clicking outside
 document.addEventListener('click', (event) => {
