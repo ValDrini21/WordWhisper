@@ -7,7 +7,8 @@
       "soundPath": "sounds/animals/dog-barking.wav",
       "alternativePronunciations": {
         "en-US": ["dog", "doggy", "doggie"],
-        "sq-AL": ["qen", "qeni"]
+        "sq-AL": ["qen", "qeni"],
+        "de-DE": ["hund", "hundchen"]
       },
       "level": "easy",
       "points": 3
@@ -19,7 +20,8 @@
       "soundPath": "sounds/animals/cat-meowing.wav",
       "alternativePronunciations": {
         "en-US": ["cat", "kitty", "kitten"],
-        "sq-AL": ["mace", "maca", "macja", "kotele"]
+        "sq-AL": ["mace", "maca", "macja", "kotele"],
+        "de-DE": ["katze", "katzen"]
       },
       "level": "easy",
       "points": 3
@@ -31,7 +33,8 @@
       "soundPath": "sounds/animals/bird-singing.mp3",
       "alternativePronunciations": {
         "en-US": ["bird", "birdie", "birdy"],
-        "sq-AL": ["zog", "zogë", "zogu"]
+        "sq-AL": ["zog", "zogë", "zogu"],
+        "de-DE": ["vogel", "vogelchen"]
       },
       "level": "medium",
       "points": 5
@@ -43,7 +46,8 @@
       "soundPath": null,
       "alternativePronunciations": {
         "en-US": ["fish", "fishy", "fishi"],
-        "sq-AL": ["peshk", "peshkë", "peshku"]
+        "sq-AL": ["peshk", "peshkë", "peshku"],
+        "de-DE": ["fisch", "fische"]
       },
       "level": "medium",
       "points": 5
@@ -55,7 +59,8 @@
       "soundPath": "sounds/animals/snake-hissing.mp3",
       "alternativePronunciations": {
         "en-US": ["snake", "snakey"],
-        "sq-AL": ["gjarper", "gjarpri", "gjarpër", "gjarpëri"]
+        "sq-AL": ["gjarper", "gjarpri", "gjarpër", "gjarpëri"],
+        "de-DE": ["schlange", "schlangen"]
       },
       "level": "hard",
       "points": 10
@@ -67,7 +72,8 @@
       "soundPath": "sounds/animals/tiger-roar.wav",
       "alternativePronunciations": {
         "en-US": ["tiger", "tiggy"],
-        "sq-AL": ["tigër", "tigëri", "tigri"]
+        "sq-AL": ["tigër", "tigëri", "tigri"],
+        "de-DE": ["tiger", "tigerchen"]
       },
       "level": "hard",
       "points": 10
@@ -79,7 +85,8 @@
       "soundPath": "sounds/animals/elephant-trumpeting.mp3",
       "alternativePronunciations": {
         "en-US": ["elephant", "elephanty"],
-        "sq-AL": ["elefant", "elefantë", "elefanti"]
+        "sq-AL": ["elefant", "elefantë", "elefanti"],
+        "de-DE": ["elefant", "elefanten"]
       },
       "level": "hard",
       "points": 10
@@ -98,7 +105,8 @@
           "lion cat",
           "lion king"
         ],
-        "sq-AL": ["luan", "luani", "mbreti i xhunglës"]
+        "sq-AL": ["luan", "luani", "mbreti i xhunglës"],
+        "de-DE": ["löwe", "löwen"]
       },
       "level": "hard",
       "points": 10
@@ -110,7 +118,8 @@
       "soundPath": "sounds/animals/bear-growling.mp3",
       "alternativePronunciations": {
         "en-US": ["bear", "beary"],
-        "sq-AL": ["ari", "ariu", "arusha"]
+        "sq-AL": ["ari", "ariu", "arusha"],
+        "de-DE": ["bär", "bären"]
       },
       "level": "medium",
       "points": 5
@@ -122,7 +131,8 @@
       "soundPath": "sounds/animals/horse-whinnying.mp3",
       "alternativePronunciations": {
         "en-US": ["horse", "horsey"],
-        "sq-AL": ["kali"]
+        "sq-AL": ["kali"],
+        "de-DE": ["pferd", "pferde"]
       },
       "level": "medium",
       "points": 5
@@ -134,7 +144,8 @@
       "soundPath": null,
       "alternativePronunciations": {
         "en-US": ["one", "number one", "1", "number 1"],
-        "sq-AL": ["një", "numri një", "numëri një", "1", "numri 1", "numëri 1"]
+        "sq-AL": ["një", "numri një", "numëri një", "1", "numri 1", "numëri 1"],
+        "de-DE": ["eins", "ein", "1", "eine"]
       },
       "level": "easy",
       "points": 3
@@ -146,7 +157,8 @@
       "soundPath": null,
       "alternativePronunciations": {
         "en-US": ["two", "number two", "2", "number 2"],
-        "sq-AL": ["dy", "numri dy", "numëri dy", "2", "numri 2", "numëri 2"]
+        "sq-AL": ["dy", "numri dy", "numëri dy", "2", "numri 2", "numëri 2"],
+        "de-DE": ["zwei", "zweie", "2", "zwei"]
       },
       "level": "hard",
       "points": 10
@@ -158,7 +170,8 @@
       "soundPath": null,
       "alternativePronunciations": {
         "en-US": ["three", "number three", "3", "number 3"],
-        "sq-AL": ["tre", "numri tre", "numëri tre", "3", "numri 3", "numëri 3"]
+        "sq-AL": ["tre", "numri tre", "numëri tre", "3", "numri 3", "numëri 3"],
+        "de-DE": ["drei", "dreie", "3", "drei"]
       },
       "level": "easy",
       "points": 3
@@ -177,7 +190,8 @@
           "4",
           "numri 4",
           "numëri 4"
-        ]
+        ],
+        "de-DE": ["vier", "viere", "4", "vier"]
       },
       "level": "hard",
       "points": 10
@@ -196,7 +210,8 @@
           "5",
           "numri 5",
           "numëri 5"
-        ]
+        ],
+        "de-DE": ["fünf", "fünfte", "5", "fünf"]
       },
       "level": "easy",
       "points": 3
@@ -215,7 +230,8 @@
           "6",
           "numri 6",
           "numëri 6"
-        ]
+        ],
+        "de-DE": ["sechs", "sechste", "6", "sechs"]
       },
       "level": "medium",
       "points": 5
@@ -234,7 +250,8 @@
           "7",
           "numri 7",
           "numëri 7"
-        ]
+        ],
+        "de-DE": ["sieben", "siebte", "7", "sieben"]
       },
       "level": "medium",
       "points": 5
@@ -253,7 +270,8 @@
           "8",
           "numri 8",
           "numëri 8"
-        ]
+        ],
+        "de-DE": ["acht", "achte", "8", "acht"]
       },
       "level": "medium",
       "points": 5
@@ -272,7 +290,8 @@
           "9",
           "numri 9",
           "numëri 9"
-        ]
+        ],
+        "de-DE": ["neun", "neunze", "9", "neun"]
       },
       "level": "easy",
       "points": 3
@@ -291,7 +310,8 @@
           "10",
           "numri 10",
           "numëri 10"
-        ]
+        ],
+        "de-DE": ["zehn", "zehnte", "10", "zehn"]
       },
       "level": "easy",
       "points": 3
@@ -310,7 +330,8 @@
           "11",
           "numri 11",
           "numëri 11"
-        ]
+        ],
+        "de-DE": ["elf", "elfte", "11", "elf"]
       },
       "level": "hard",
       "points": 10
@@ -328,7 +349,8 @@
           "spongjbob",
           "spongj bob",
           "Bob Sfungjeri"
-        ]
+        ],
+        "de-DE": ["elf", "elfte", "11", "elf"]
       },
       "level": "medium",
       "points": 5
@@ -347,7 +369,8 @@
           "spajdermeni",
           "spajdërmeni",
           "njeriu merimangë"
-        ]
+        ],
+        "de-DE": ["spider-man", "spiderman"]
       },
       "level": "medium",
       "points": 5
@@ -359,7 +382,8 @@
       "soundPath": "sounds/cartoons/batman-theme.mp3",
       "alternativePronunciations": {
         "en-US": ["batman"],
-        "sq-AL": ["batman", "betmen", "betmeni"]
+        "sq-AL": ["batman", "betmen", "betmeni"],
+        "de-DE": ["batman"]
       },
       "level": "medium",
       "points": 5
@@ -371,7 +395,8 @@
       "soundPath": "sounds/cartoons/superman-theme.mp3",
       "alternativePronunciations": {
         "en-US": ["superman"],
-        "sq-AL": ["superman", "supermen", "supermeni", "super njeriu"]
+        "sq-AL": ["superman", "supermen", "supermeni", "super njeriu"],
+        "de-DE": ["superman"]
       },
       "level": "medium",
       "points": 5
@@ -388,7 +413,8 @@
           "lightning mcqueen",
           "vetura rrufe",
           "makina rrufe"
-        ]
+        ],
+        "de-DE": ["mcqueen", "lightning mcqueen"]
       },
       "level": "hard",
       "points": 10
@@ -406,7 +432,8 @@
           "miki maus",
           "miki mausi",
           "Miushi Miki"
-        ]
+        ],
+        "de-DE": ["mickey mouse", "mickey"]
       },
       "level": "hard",
       "points": 10
@@ -418,7 +445,8 @@
       "soundPath": "sounds/cartoons/hello-banana.mp3",
       "alternativePronunciations": {
         "en-US": ["minions", "miniony"],
-        "sq-AL": ["minions", "minionat"]
+        "sq-AL": ["minions", "minionat"],
+        "de-DE": ["minions", "minionen"]
       },
       "level": "medium",
       "points": 5
@@ -438,7 +466,8 @@
           "tomi gjeri",
           "tom dhe gjeri",
           "tomi dhe gjeri"
-        ]
+        ],
+        "de-DE": ["tom and jerry", "tommy jerry", "tommy and jerry"]
       },
       "level": "hard",
       "points": 10
@@ -450,7 +479,8 @@
       "soundPath": "sounds/cartoons/shrek-song.mp3",
       "alternativePronunciations": {
         "en-US": ["shrek"],
-        "sq-AL": ["shrek", "shreku", "përbindshi i gjelbërt"]
+        "sq-AL": ["shrek", "shreku", "përbindshi i gjelbërt"],
+        "de-DE": ["shrek"]
       },
       "level": "hard",
       "points": 10
@@ -462,7 +492,13 @@
       "soundPath": "sounds/cartoons/pink-panther-theme.mp3",
       "alternativePronunciations": {
         "en-US": ["pink panther"],
-        "sq-AL": ["pink panther", "pink panter", "pink panteri", "Pantera rozë"]
+        "sq-AL": [
+          "pink panther",
+          "pink panter",
+          "pink panteri",
+          "Pantera rozë"
+        ],
+        "de-DE": ["pink panther"]
       },
       "level": "medium",
       "points": 5

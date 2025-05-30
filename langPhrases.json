@@ -34,5 +34,22 @@
     "playSound": "Luaj audion",
     "pauseSound": "Ndalo audion",
     "itemsSkipped": "Pyetjet që keni tejkaluar:"
+  },
+  "de-DE": {
+    "greeting": "Hallo Benutzer",
+    "gameTitle": "Du spielst das Spiel \"Word Whisper!\"",
+    "chooseCategory": "Bitte wähle eine Kategorie, indem du in das Mikrofon sprichst",
+    "tip": "Tipp: Klicke auf den Talk-Button und sage den Kategorienamen",
+    "skipHint": "Tipp: Während des Spiels kannst du 'überspringen' sagen",
+    "whisperPrompt": "Sag uns, was das ist?",
+    "playAgain": "Sage 'Nochmal spielen' um neu zu starten",
+    "categoryComplete": "Hurra! Du hast die Kategorie abgeschlossen!",
+    "yourScore": "Dein Ergebnis ist:",
+    "skip": "überspringen",
+    "progressOf": "von",
+    "progressItems": "Fragen",
+    "playSound": "Ton abspielen",
+    "pauseSound": "Ton pausieren",
+    "itemsSkipped": "Übersprungene Fragen:"
   }
 }

@@ -4,12 +4,14 @@
       "id": "animals",
       "name": {
         "en-US": "Animals",
-        "sq-AL": "Kafshët"
+        "sq-AL": "Kafshët",
+        "de-DE": "Tiere"
       },
       "imagePath": "images/animals/animals.jpg",
       "description": {
         "en-US": "Learn about different animals",
-        "sq-AL": "Mësoni për kafshët e ndryshme"
+        "sq-AL": "Mësoni për kafshët e ndryshme",
+        "de-DE": "Lerne verschiedene Tiere kennen"
       },
       "soundEffect": "sounds/general/animals-intro.mp3"
     },
@@ -17,12 +19,14 @@
       "id": "numbers",
       "name": {
         "en-US": "Numbers",
-        "sq-AL": "Numrat"
+        "sq-AL": "Numrat",
+        "de-DE": "Zahlen"
       },
       "imagePath": "images/numbers/numbers.jpg",
       "description": {
         "en-US": "Learn to count numbers",
-        "sq-AL": "Mësoni të numërosh numrat"
+        "sq-AL": "Mësoni të numërosh numrat",
+        "de-DE": "Lerne Zahlen zu zählen"
       },
       "soundEffect": "sounds/general/numbers-intro.mp3"
     },
@@ -30,12 +34,14 @@
       "id": "cartoons",
       "name": {
         "en-US": "Cartoons",
-        "sq-AL": "Filma të vizatuar"
+        "sq-AL": "Filma të vizatuar",
+        "de-DE": "Zeichentrickfilme"
       },
       "imagePath": "images/cartoons/cartoons.jpg",
       "description": {
         "en-US": "Fun cartoon characters",
-        "sq-AL": "Personazhe të këndshëm të filmave vizatimorë"
+        "sq-AL": "Personazhe të këndshëm të filmave vizatimorë",
+        "de-DE": "Lustige Zeichentrickfiguren"
       },
       "soundEffect": "sounds/general/cartoons-intro.mp3"
     }
