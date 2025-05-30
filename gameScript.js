@@ -433,6 +433,12 @@ function displayNextItem(options = { stopSound: true }) {
         </div>
     `;
 
+    // Show restart button
+    const restartButton = document.getElementById('restart-button');
+    if (restartButton) {
+        restartButton.classList.remove('hidden');
+    }
+
     updateProgressBar();
 
     // Remove the displayed item from remaining items
@@ -598,6 +604,12 @@ function endCategory() {
 
     // Trigger confetti
     triggerConfetti();
+
+    // Hide restart button
+    const restartButton = document.getElementById('restart-button');
+    if (restartButton) {
+        restartButton.classList.add('hidden');
+    }
 }
 
 // Add these new functions to handle UI elements
@@ -625,6 +637,12 @@ function resetGameElements() {
     // Hide skipped items container
     const skippedContainer = document.getElementById('skipped-items-container');
     skippedContainer.classList.add('hidden');
+
+    // Hide restart button
+    const restartButton = document.getElementById('restart-button');
+    if (restartButton) {
+        restartButton.classList.add('hidden');
+    }
 }
 
 function resetGameState() {
