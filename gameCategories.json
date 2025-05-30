@@ -2,23 +2,41 @@
   "categories": [
     {
       "id": "animals",
-      "name": "Animals",
+      "name": {
+        "en-US": "Animals",
+        "sq-AL": "Kafshët"
+      },
       "imagePath": "images/animals/animals.jpg",
-      "description": "Learn about different animals",
+      "description": {
+        "en-US": "Learn about different animals",
+        "sq-AL": "Mësoni për kafshët e ndryshme"
+      },
       "soundEffect": "sounds/general/animals-intro.mp3"
     },
     {
       "id": "numbers",
-      "name": "Numbers",
+      "name": {
+        "en-US": "Numbers",
+        "sq-AL": "Numrat"
+      },
       "imagePath": "images/numbers/numbers.jpg",
-      "description": "Learn to count numbers",
+      "description": {
+        "en-US": "Learn to count numbers",
+        "sq-AL": "Mësoni të numërosh numrat"
+      },
       "soundEffect": "sounds/general/numbers-intro.mp3"
     },
     {
       "id": "cartoons",
-      "name": "Cartoons",
+      "name": {
+        "en-US": "Cartoons",
+        "sq-AL": "Filma të vizatuar"
+      },
       "imagePath": "images/cartoons/cartoons.jpg",
-      "description": "Fun cartoon characters",
+      "description": {
+        "en-US": "Fun cartoon characters",
+        "sq-AL": "Personazhe të këndshëm të filmave vizatimorë"
+      },
       "soundEffect": "sounds/general/cartoons-intro.mp3"
     }
   ]

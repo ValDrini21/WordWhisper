@@ -1,3 +1,5 @@
+import { LanguageManager } from './languageManager.js';
+
 console.log(`
 %cWord Whisper
 %cCreated by Valdrin Nasufi
@@ -33,6 +35,36 @@ recognition.continuous = false;
 recognition.interimResults = false;
 recognition.lang = 'en-US';
 
+// Create GAME_LANGUAGE instance after recognition is set up
+const GAME_LANGUAGE = new LanguageManager(recognition, gameState);
+
+// Make recognition available globally
+window.recognition = recognition;
+
+// Add this after the GAME_LANGUAGE object definition
+window.setLanguage = (lang) => {
+    GAME_LANGUAGE.setLanguage(lang);
+
+    // Update button content
+    const button = document.getElementById('language-button');
+    const currentLanguage = document.getElementById('current-language');
+    const flag = button.querySelector('img');
+
+    if (lang === 'en-US') {
+        flag.src = 'images/flags/us.svg';
+        currentLanguage.textContent = 'English';
+    } else {
+        flag.src = 'images/flags/al.svg';
+        currentLanguage.textContent = 'Shqip';
+    }
+
+    // Hide dropdown
+    document.getElementById('language-dropdown').classList.add('hidden');
+};
+
+// Make startSpeech available globally
+window.startSpeech = startSpeech;
+
 // Load Categories
 async function loadCategories() {
     try {
@@ -60,24 +92,11 @@ function displayCategories(categories) {
     const categoriesContainer = document.getElementById('game-categories');
     categoriesContainer.innerHTML = categories.map((category, index) => `
         <div class="category-card ${getRotationClass(index)}" data-category-id="${category.id}">
-            <img src="${category.imagePath}" alt="${category.name}" class="w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 object-cover rounded" />
-            <h3 class="text-lg font-semibold">${category.name}</h3>
-            <p class="text-sm text-gray-600">${category.description}</p>
+            <img src="${category.imagePath}" alt="${category.name[GAME_LANGUAGE.current]}" class="w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 object-cover rounded" />
+            <h3 class="category-name text-lg font-semibold">${category.name[GAME_LANGUAGE.current]}</h3>
+            <p class="category-description text-sm text-gray-600">${category.description[GAME_LANGUAGE.current]}</p>
         </div>
     `).join('');
-
-    // Add instruction text
-    const instruction = document.createElement('p');
-    const instructionText = document.getElementById('game-instruction-text');
-    instruction.className = "text-center text-lg font-semibold mt-12";
-    instruction.textContent = "Please choose a category by speaking on the mic to continue";
-    instructionText.appendChild(instruction);
-
-    // Add skip hint
-    const skipHint = document.createElement('p');
-    skipHint.className = "text-center text-sm text-gray-500 mt-2";
-    skipHint.textContent = "Tip: During the game, you can say 'skip' to skip the current item";
-    instructionText.appendChild(skipHint);
 }
 
 // Add this function to check for microphone availability
@@ -171,12 +190,12 @@ async function startSpeech() {
 // Select category based on speech
 function selectCategory(transcript) {
     return gameState.categories.find(cat =>
-        cat.name.toLowerCase() === transcript
+        cat.name[GAME_LANGUAGE.current].toLowerCase() === transcript.toLowerCase()
     );
 }
 
 // Play category sound effect
-function playSound(soundPath, ShouldStopCurrentSound = true) {
+window.playSound = function playSound(soundPath, ShouldStopCurrentSound = true) {
     if (!soundPath) {
         return;
     }
@@ -231,12 +250,12 @@ function updateSoundButton(soundPath, isPlaying) {
     const button = document.querySelector(`button[data-sound-path="${soundPath}"]`);
     if (button) {
         if (isPlaying) {
-            button.innerHTML = 'Pause Sound';
+            button.innerHTML = GAME_LANGUAGE.getPhrase('pauseSound');
             button.onclick = () => pauseSound(soundPath);
             button.classList.remove('bg-blue-500');
             button.classList.add('bg-yellow-500');
         } else {
-            button.innerHTML = 'Play Sound';
+            button.innerHTML = GAME_LANGUAGE.getPhrase('playSound');
             button.onclick = () => playSound(soundPath, true);
             button.classList.remove('bg-yellow-500');
             button.classList.add('bg-blue-500');
@@ -265,7 +284,7 @@ function stopCurrentSound() {
 
 
 recognition.onresult = async (event) => {
-    // console.log("Speech recognized:", event.results);
+    console.log("Speech recognized:", event.results);
     const transcript = event.results[0][0].transcript.toLowerCase();
     document.getElementById('speech-text').textContent = transcript;
 
@@ -292,7 +311,7 @@ recognition.onresult = async (event) => {
         }
     } else {
         if (gameState.remainingItems.length === 0) {
-            if (transcript === 'play again') {
+            if (transcript.toLowerCase() === GAME_LANGUAGE.getPhrase('playAgain').toLowerCase()) {
                 playAgain();
                 return;
             }
@@ -322,6 +341,9 @@ async function loadCategoryItems(categoryId) {
         const response = await fetch('gameData.json');
         const data = await response.json();
         // console.log('Category items loaded:', data);
+
+        // Hide language selector
+        GAME_LANGUAGE.updateLanguageSelectorVisibility(false);
 
         gameState.remainingItems = data.items.filter(item =>
             item.categoryId === categoryId
@@ -398,10 +420,10 @@ function displayNextItem(options = { stopSound: true }) {
                     data-sound-path="${item.soundPath}"
                     onclick="playSound('${item.soundPath}', true)"
                     class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
-                    Play Sound
+                    ${GAME_LANGUAGE.getPhrase('playSound')}
                 </button>
             ` : ''}
-            <p class="text-lg md:text-xl font-semibold text-center px-2">Whisper on the mic to tell us what this is?</p>
+            <p class="text-lg md:text-xl font-semibold text-center px-2">${GAME_LANGUAGE.getPhrase('whisperPrompt')}</p>
         </div>
     `;
 
@@ -425,7 +447,7 @@ function updateProgressBar() {
     // Update text
     const textContainer = progressContainer.querySelector('.flex.justify-between');
     textContainer.innerHTML = `
-        <span>${gameState.completedItems} of ${gameState.totalItems} items</span>
+        <span>${gameState.completedItems} ${GAME_LANGUAGE.getPhrase('progressOf')} ${gameState.totalItems} ${GAME_LANGUAGE.getPhrase('progressItems')}</span>
         <span>${Math.round(progress)}%</span>
     `;
 }
@@ -440,7 +462,7 @@ function calculateBonusPoints(responseTime) {
 
 function checkAnswer(transcript) {
     // console.log("Checking answer:", transcript);
-    if (transcript.toLowerCase() === 'skip') {
+    if (transcript.toLowerCase() === GAME_LANGUAGE.getPhrase('skip').toLowerCase()) {
         gameState.skippedItems.push(gameState.currentItem);
         playSound('sounds/general/skip.wav', false);
 
@@ -458,8 +480,8 @@ function checkAnswer(transcript) {
         return;
     }
 
-    const isCorrect = gameState.currentItem.alternativePronunciations.some(
-        pronunciation => pronunciation.toLowerCase() === transcript
+    const isCorrect = gameState.currentItem.alternativePronunciations[GAME_LANGUAGE.current].some(
+        pronunciation => pronunciation.toLowerCase() === transcript.toLowerCase()
     );
 
     if (isCorrect) {
@@ -541,9 +563,9 @@ function endCategory() {
     const questionContainer = document.getElementById('game-question');
     questionContainer.innerHTML = `
         <div class="text-center">
-            <h2 class="text-2xl font-bold mb-4">Hooray! You've completed the category!</h2>
-            <p class="text-xl mb-4">Your score is: ${gameState.userScore}</p>
-            <p class="text-lg">Speak the word 'Play again' to start over</p>
+            <h2 class="text-2xl font-bold mb-4">${GAME_LANGUAGE.getPhrase('categoryComplete')}</h2>
+            <p class="text-xl mb-4">${GAME_LANGUAGE.getPhrase('yourScore')} ${gameState.userScore}</p>
+            <p class="text-lg">${GAME_LANGUAGE.getPhrase('playAgainPhrase')}</p>
         </div>
     `;
 
@@ -561,7 +583,7 @@ function endCategory() {
                         class="w-full h-full object-contain"
                     />
                 </div>
-                <p class="text-lg font-semibold text-center mt-2">${item.alternativePronunciations[0]}</p>
+                <p class="text-lg font-semibold text-center mt-2">${item.alternativePronunciations[GAME_LANGUAGE.current][0]}</p>
             </div>
         `).join('');
     } else {
@@ -619,6 +641,9 @@ function playAgain() {
     // Reset game state and UI elements
     resetGameState();
     resetGameElements();
+
+    // Show language selector
+    GAME_LANGUAGE.updateLanguageSelectorVisibility(true);
 }
 
 // Initialize the game
@@ -630,6 +655,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    // Load language phrases before loading categories
+    await GAME_LANGUAGE.loadLanguagePhrases();
     loadCategories();
 });
 
+// Add to gameScript.js
+window.toggleLanguageDropdown = function () {
+    const dropdown = document.getElementById('language-dropdown');
+    dropdown.classList.toggle('hidden');
+};
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (event) => {
+    const dropdown = document.getElementById('language-dropdown');
+    const button = document.getElementById('language-button');
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.add('hidden');
+    }
+});

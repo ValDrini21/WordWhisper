@@ -9,17 +9,67 @@
     <link rel="icon" href="images/favicon.ico" />
   </head>
   <body>
-    <h1 class="text-2xl font-bold text-center mt-8">
+    <h1 id="greeting" class="text-2xl font-bold text-center mt-8">
       Hello User <span>👋</span>
     </h1>
 
-    <h2 class="text-xl font-bold text-center mt-4">
+    <h2 id="game-title" class="text-xl font-bold text-center mt-4">
       You are playing "Word Whisper!" game
     </h2>
 
+    <!-- language section -->
+    <div
+      id="language-selection"
+      class="flex justify-end items-center gap-2 mr-4 mt-2 sm:mt-1 md:mt-0"
+    >
+      <div class="relative">
+        <button
+          id="language-button"
+          onclick="toggleLanguageDropdown()"
+          class="flex items-center gap-2 bg-white border border-gray-300 rounded-lg px-4 py-2 pr-6 focus:outline-none focus:border-blue-500 cursor-pointer"
+        >
+          <img src="images/flags/us.svg" alt="US" class="w-6 h-6" />
+          <span id="current-language">English</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 ml-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+        <div
+          id="language-dropdown"
+          class="hidden absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg"
+        >
+          <div
+            class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            onclick="setLanguage('en-US')"
+          >
+            <img src="images/flags/us.svg" alt="US" class="w-10 h-10" />
+            <span>English</span>
+          </div>
+          <div
+            class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            onclick="setLanguage('sq-AL')"
+          >
+            <img src="images/flags/al.svg" alt="AL" class="w-10 h-10" />
+            <span>Shqip</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div
       id="game-container"
-      class="flex flex-col gap-4 my-4 md:my-10 mx-2 md:mx-4 min-h-[80vh]"
+      class="flex flex-col gap-4 my-2 md:my-6 mx-2 md:mx-4 min-h-[80vh]"
     >
       <div id="game-box" class="flex-1 bg-gray-100 p-2 md:p-4 rounded">
         <div
@@ -49,7 +99,10 @@
 
         <!-- Add skipped items container -->
         <div id="skipped-items-container" class="w-full mt-6 hidden">
-          <h3 class="text-lg font-semibold mb-3 text-center">
+          <h3
+            id="skipped-items-title"
+            class="text-lg font-semibold mb-3 text-center"
+          >
             Items you skipped:
           </h3>
           <div class="flex flex-wrap gap-4 justify-center">
@@ -102,7 +155,7 @@
       </div>
     </div>
 
-    <script src="gameScript.js"></script>
+    <script type="module" src="gameScript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   </body>
 </html>
