@@ -53,9 +53,15 @@ window.setLanguage = (lang) => {
     if (lang === 'en-US') {
         flag.src = 'images/flags/us.svg';
         currentLanguage.textContent = 'English';
-    } else {
+    } else if (lang === 'de-DE') {
+        flag.src = 'images/flags/de.svg';
+        currentLanguage.textContent = 'Deutsch';
+    } else if (lang === 'sq-AL') {
         flag.src = 'images/flags/al.svg';
         currentLanguage.textContent = 'Shqip';
+    } else {
+        flag.src = 'images/flags/us.svg';
+        currentLanguage.textContent = 'English';
     }
 
     // Hide dropdown
