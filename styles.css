@@ -106,6 +106,41 @@
   opacity: 1;
 }
 
+/* Custom select styling */
+#language-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+#language-select option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* Add a subtle animation when changing language */
+#language-select:focus {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Add to your existing styles */
+#language-dropdown {
+  transition: all 0.2s ease-in-out;
+}
+
+#language-button:hover {
+  background-color: #f9fafb;
+}
+
+#language-dropdown div:hover {
+  background-color: #f3f4f6;
+}
+
 @media (min-width: 535px) {
   .xs\:mt-20 {
     margin-top: 5rem; /* This is equivalent to mt-20 in Tailwind */

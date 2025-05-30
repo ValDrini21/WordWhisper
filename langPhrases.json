@@ -1,0 +1,38 @@
+{
+  "en-US": {
+    "greeting": "Hello User",
+    "gameTitle": "You are playing \"Word Whisper!\" game",
+    "chooseCategory": "Please choose a category by speaking on the mic to continue",
+    "tip": "Tip: Click the Talk button and say the category name",
+    "skipHint": "Tip: During the game, you can say 'skip' to skip the current item",
+    "whisperPrompt": "Whisper on the mic to tell us what this is?",
+    "playAgainPhrase": "Speak the word 'Play again' to start over",
+    "playAgain": "Play Again",
+    "categoryComplete": "Hooray! You've completed the category!",
+    "yourScore": "Your score is:",
+    "skip": "skip",
+    "progressOf": "of",
+    "progressItems": "items",
+    "playSound": "Play Sound",
+    "pauseSound": "Pause Sound",
+    "itemsSkipped": "Items you skipped:"
+  },
+  "sq-AL": {
+    "greeting": "Përshëndetje Përdorues",
+    "gameTitle": "Ju jeni duke luajtur lojën \"Word Whisper!\"",
+    "chooseCategory": "Ju lutemi zgjidhni një kategori duke folur në mikrofon për të vazhduar",
+    "tip": "Këshillë: Klikoni butonin Talk dhe thoni emrin e kategorisë",
+    "skipHint": "Këshillë: Gjatë lojës, mund të thoni 'tejkalo' për të kaluar te pyetja tjetër",
+    "whisperPrompt": "Pëshpëritni në mikrofon për të na treguar çfarë është kjo?",
+    "playAgainPhrase": "Thoni fjalën 'Luaj përsëri' për të filluar nga e para",
+    "playAgain": "Luaj përsëri",
+    "categoryComplete": "Urime! Keni përfunduar kategorinë!",
+    "yourScore": "Rezultati juaj është:",
+    "skip": "tejkalo",
+    "progressOf": "nga",
+    "progressItems": "pyetje",
+    "playSound": "Luaj audion",
+    "pauseSound": "Ndalo audion",
+    "itemsSkipped": "Pyetjet që keni tejkaluar:"
+  }
+}
