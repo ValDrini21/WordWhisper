@@ -99,10 +99,18 @@
           </div>
         </div>
 
-        <div
-          id="game-question"
-          class="flex flex-col items-center gap-4 mt-4"
-        ></div>
+        <div id="game-question" class="flex flex-col items-center gap-4 mt-4">
+          <!-- existing content -->
+        </div>
+        <div class="flex justify-end">
+          <button
+            id="restart-button"
+            onclick="window.location.reload()"
+            class="hidden self-end mt-4 bg-red-500 text-white px-2 py-1 text-sm rounded hover:bg-red-600 transition-colors duration-300"
+          >
+            Restart
+          </button>
+        </div>
 
         <!-- Add skipped items container -->
         <div id="skipped-items-container" class="w-full mt-6 hidden">

@@ -71,6 +71,7 @@ export class LanguageManager {
         const greeting = document.getElementById('greeting');
         const gameTitle = document.getElementById('game-title');
         const skippedItemsTitle = document.getElementById('skipped-items-title');
+        const restartButton = document.getElementById('restart-button');
 
         if (greeting) {
             greeting.innerHTML = `${this.getPhrase('greeting')} <span>👋</span>`;
@@ -83,12 +84,26 @@ export class LanguageManager {
         if (skippedItemsTitle) {
             skippedItemsTitle.textContent = this.getPhrase('itemsSkipped');
         }
+
+        if (restartButton) {
+            restartButton.textContent = this.getPhrase('restart');
+        }
     }
 
     updateLanguageSelectorVisibility(show) {
         const languageSelection = document.getElementById('language-selection');
+        const restartButton = document.getElementById('restart-button');
+
         if (languageSelection) {
             languageSelection.style.display = show ? 'flex' : 'none';
+        }
+
+        if (restartButton) {
+            if (show) {
+                restartButton.classList.add('hidden');
+            } else {
+                restartButton.classList.remove('hidden');
+            }
         }
     }
 }

@@ -15,7 +15,8 @@
     "progressItems": "items",
     "playSound": "Play Sound",
     "pauseSound": "Pause Sound",
-    "itemsSkipped": "Items you skipped:"
+    "itemsSkipped": "Items you skipped:",
+    "restart": "Restart"
   },
   "sq-AL": {
     "greeting": "Përshëndetje Përdorues",
@@ -33,7 +34,8 @@
     "progressItems": "pyetje",
     "playSound": "Luaj audion",
     "pauseSound": "Ndalo audion",
-    "itemsSkipped": "Pyetjet që keni tejkaluar:"
+    "itemsSkipped": "Pyetjet që keni tejkaluar:",
+    "restart": "Rifillo"
   },
   "de-DE": {
     "greeting": "Hallo Benutzer",
@@ -50,6 +52,7 @@
     "progressItems": "Fragen",
     "playSound": "Ton abspielen",
     "pauseSound": "Ton pausieren",
-    "itemsSkipped": "Übersprungene Fragen:"
+    "itemsSkipped": "Übersprungene Fragen:",
+    "restart": "Neustart"
   }
 }
