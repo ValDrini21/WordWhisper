@@ -25,7 +25,7 @@
   - Add a progress bar as user moves on with the questions
   - Game sounds when user gets a category item name correctly like 'Ding' or incorrectly like 'buzz'
   - Sound effects based on the category selected by user
-
+  - New ideas to come soon
 ---
 
 Tasks
